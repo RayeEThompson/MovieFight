@@ -1,2 +1,1 @@
-# MovieFight
-Movie Fight Application
+# Movie Fight Application
