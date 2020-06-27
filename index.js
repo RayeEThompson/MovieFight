@@ -10,6 +10,21 @@ const fetchData = async (searchTerm) => {
   console.log(response.data);
 };
 
-input.addEventListener("input", (event) => {
-    fetchData(event.target.value);
-  });
+//debounce search event - gives user delay to be able to type their search
+const debounce = (func, delay = 1000) => {
+  let timeoutId;
+  return (...args) => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      func.apply(null, args);
+    }, delay);
+  };
+};
+
+const onInput = (event) => {
+  fetchData(event.target.value);
+};
+
+input.addEventListener("input", debounce(onInput, 500));
